@@ -15,7 +15,6 @@ export default function HomePage() {
   
   const featured = filteredEvents.slice(0, 3);
   const trending = filteredEvents.slice(1, 4);
-  const personalized = filteredEvents.slice(2, 5);
 
   return (
     <div>
@@ -66,18 +65,6 @@ export default function HomePage() {
             </div>
             <div className="event-grid">
               {trending.map((event) => (
-                <EventCard key={event.id} event={event} />
-              ))}
-            </div>
-          </section>
-
-          <section className="events-section">
-            <div className="section-heading">
-              <h2>For you</h2>
-              <Link to="/profile">Personalized picks</Link>
-            </div>
-            <div className="event-grid">
-              {personalized.map((event) => (
                 <EventCard key={event.id} event={event} />
               ))}
             </div>
