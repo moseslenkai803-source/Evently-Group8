@@ -4,10 +4,9 @@ const navItems = [
   { label: 'Home', to: '/' },
   { label: 'Explore', to: '/explore' },
   { label: 'Create', to: '/create' },
-  { label: 'Profile', to: '/profile' },
 ];
 
-export default function Navigation({ isLoggedIn, onLogout }) {
+export default function Navigation() {
   return (
     <nav className="navbar">
       <div className="brand">EVENTLY</div>
@@ -22,16 +21,6 @@ export default function Navigation({ isLoggedIn, onLogout }) {
           </NavLink>
         ))}
       </div>
-
-      {isLoggedIn ? (
-        <button type="button" className="secondary-button small-button logout-button" onClick={onLogout}>
-          Logout
-        </button>
-      ) : (
-        <NavLink to="/login" className="primary-button small-button">
-          Login
-        </NavLink>
-      )}
     </nav>
   );
 }
