@@ -1,0 +1,8 @@
+/* Design tokens */
+:root{
+  --color-primary: #375a7f;
+  --color-accent: #f05a28;
+  --color-bg: #ffffff;
+  --color-text: #222222;
+  --radius: 8px;
+}
