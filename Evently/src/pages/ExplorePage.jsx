@@ -66,8 +66,14 @@ export default function ExplorePage() {
               </div>
             ) : (
               <div className="no-results">
-                <p>No events found matching your criteria.</p>
-                <p className="no-results-hint">Try adjusting your search or filters.</p>
+                <p>😕 No events found matching your criteria.</p>
+                <p className="no-results-hint">
+                  {searchQuery ? (
+                    <>Try adjusting your search for "<strong>{searchQuery}</strong>" or clear filters.</>
+                  ) : (
+                    <>No events available in this category. Try browsing other categories!</>
+                  )}
+                </p>
               </div>
             )}
           </div>

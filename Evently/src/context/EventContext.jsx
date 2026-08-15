@@ -1,20 +1,31 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { sampleEvents } from '../data';
 
 const EventContext = createContext();
 
 export function EventProvider({ children }) {
-  const [events, setEvents] = useState([]);
-
-  // Load events from localStorage on mount, or use sample events
-  useEffect(() => {
-    const savedEvents = localStorage.getItem('events');
-    if (savedEvents) {
-      setEvents(JSON.parse(savedEvents));
-    } else {
-      setEvents(sampleEvents);
+  const [events, setEvents] = useState(() => {
+    // Guard localStorage access for SSR
+    if (typeof localStorage === 'undefined') {
+      return sampleEvents;
     }
-  }, []);
+    
+    try {
+      const savedEvents = localStorage.getItem('events');
+      if (savedEvents) {
+        const parsed = JSON.parse(savedEvents);
+        // Accept only if it's an array of event records
+        if (Array.isArray(parsed)) {
+          return parsed;
+        }
+      }
+    } catch (error) {
+      // JSON.parse failure - silently fall back to sampleEvents
+      console.error('Error parsing events from localStorage:', error);
+    }
+    
+    return sampleEvents;
+  });
 
   // Save events to localStorage whenever they change
   useEffect(() => {
@@ -37,12 +48,4 @@ export function EventProvider({ children }) {
       {children}
     </EventContext.Provider>
   );
-}
-
-export function useEvents() {
-  const context = useContext(EventContext);
-  if (!context) {
-    throw new Error('useEvents must be used within an EventProvider');
-  }
-  return context;
 }
