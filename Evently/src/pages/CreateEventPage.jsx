@@ -32,7 +32,7 @@ export default function CreateEventPage() {
       alert('Please fill in all required fields');
       return;
     }
-    // Here you would typically send the data to a server
+    // on create form submittion
     alert(`Event "${formData.title}" created successfully!`);
     // Reset form and navigate back
     setFormData({
@@ -108,7 +108,7 @@ export default function CreateEventPage() {
                 name="location"
                 value={formData.location}
                 onChange={handleChange}
-                placeholder="e.g., Central Park, New York"
+                placeholder="e.g., Uhuru Park, Nairobi"
                 required
               />
             </div>
@@ -140,7 +140,7 @@ export default function CreateEventPage() {
                 name="price"
                 value={formData.price}
                 onChange={handleChange}
-                placeholder="e.g., $25"
+                placeholder="e.g., Ksh 250"
               />
             </div>
 
